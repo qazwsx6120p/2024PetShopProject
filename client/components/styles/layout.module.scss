@@ -1,0 +1,52 @@
+.wrapper{
+  min-height: 100%; /*外層高度100%*/
+  margin-bottom: -50px; /*隨footer高度需做調整*/
+}
+.mainContent {
+  padding-bottom: 50px; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+}
+
+
+/* 超大型裝置（大型桌機） */
+@media (min-width: 1200px) {
+  .wrapper{
+    min-height: 100%; /*外層高度100%*/
+    margin-bottom: -200px; /*隨footer高度需做調整*/
+  }
+  .mainContent {
+    padding-bottom: 200px; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+  }
+}
+
+/* RWD 桌面電腦 */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .wrapper{
+    min-height: 100%; /*外層高度100%*/
+    margin-bottom: -200px; /*隨footer高度需做調整*/
+  }
+  .mainContent {
+    padding-bottom: 200px; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+  }
+}
+
+/* RWD 平板電腦 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .wrapper{
+    min-height: 100%; /*外層高度100%*/
+    margin-bottom: -400px; /*隨footer高度需做調整*/
+  }
+  .mainContent {
+    padding-bottom: 400px; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+  }
+}
+
+/* RWD 手機 */
+@media screen and (min-width: 0px) and (max-width: 767px) {
+  .wrapper{
+    min-height: 100%; /*外層高度100%*/
+    margin-bottom: -600px; /*隨footer高度需做調整*/
+  }
+  .mainContent {
+    padding-bottom: 600px; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+  }
+}

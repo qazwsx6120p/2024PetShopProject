@@ -1,0 +1,81 @@
+.background {
+  padding: 20px;
+  width: 100%;
+  height: 91vh;
+}
+
+.tabContainer {
+  margin-top: 10px;
+}
+
+.orderContainer {
+  margin-top: 10px;
+}
+.orderContainer .personalCard {
+  background-color: #ffffff !important;
+  border: 1px solid #ca7658;
+  border-radius: 0 !important;
+}
+.orderContainer .personalCard .storeBtn {
+  text-decoration: none;
+  width: 9rem;
+  height: 2rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: #f86363;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.orderContainer .orderCard {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: none !important;
+}
+.orderContainer .orderCard .order {
+  border: 1px solid #ca7658;
+  background-color: #ffffff;
+  margin: 12px 0 12px 0;
+}
+.orderContainer .orderCard .order .pBox {
+  height: 2rem;
+  background-color: #ca7658;
+  display: flex;
+  align-items: center;
+}
+.orderContainer .orderCard .order .pBox .p {
+  color: white;
+  margin: 0 0 0 10px;
+}
+.orderContainer .orderCard .order .imgBox {
+  width: 5rem;
+  height: 5rem;
+  overflow: hidden;
+}
+.orderContainer .orderCard .order .imgBox .img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.orderContainer .orderCard .order .detailText {
+  width: 85%;
+}
+.orderContainer .orderCard .order .hr {
+  width: 98%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.orderContainer .orderCard .order .orderItemPrice {
+  background-color: #eee;
+  width: 98%;
+  display: flex;
+  padding: 8px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.orderContainer .orderCard .searchOrder {
+  border: 1px solid #ca7658;
+  background-color: #ffffff;
+  margin: 8px 0 8px 0;
+}/*# sourceMappingURL=personalPage.module.css.map */

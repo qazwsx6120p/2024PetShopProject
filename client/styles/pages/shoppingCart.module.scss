@@ -1,0 +1,297 @@
+.checkoutBox {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background-color: #ffffff;
+  border-top: 1px solid #eaeaea;
+  padding: 10px 20px;
+  box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* 調整層級 */
+  .checkoutBoxBtn {
+    background-color: #ff9e1b;
+    width: 70px;
+    height: 30px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    margin-left: 15px;
+  }
+}
+.goLoginBtn{
+  text-decoration: none;
+  width: 9rem;
+  height: 2rem;
+  text-align: center;
+  color: #ffffff;
+  background-color: #f86363;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+//====================RWD 768px 以上========================
+
+.main {
+  background-color: #eee;
+
+  .breadcrumbBox {
+    width: 150px;
+    height: 30px;
+    border: 1px solid #676767;
+    vertical-align: middle;
+    border-radius: 15px;
+    background-color: #ffffff;
+  }
+
+  .noProductsBox {
+    background-color: #fff;
+  }
+
+  .cartAbove768 {
+    // 購物車商品
+    .table {
+      background-color: #ffffff;
+      border-collapse: collapse;
+      border-spacing: 0;
+      .thead {
+        height: 30px;
+        .theadTr {
+          .theadTrTdFirst {
+            color: white;
+            padding-left: 1rem;
+            text-align: start;
+            background-color: #ca7658;
+            border-top-left-radius: 5px;
+            margin-top: 0.5rem 0 0.5rem 0;
+          }
+
+          .theadTrTdLast {
+            text-align: center;
+            color: white;
+            background-color: #ca7658;
+            border-top-right-radius: 5px;
+            margin-top: 0.5rem 0 0.5rem 0;
+          }
+
+          .clearShoppingCart {
+            margin-top: 0.5rem 0 0.5rem 0;
+            background-color: #ca7658;
+            width: 8rem;
+            .rxCrossCircled {
+              color: white;
+            }
+            .clearShoppingCartButton {
+              margin: 0;
+              word-wrap: nowrap;
+              background-color: #ffffff00;
+              color: white;
+              border: none;
+            }
+          }
+          .theadTrTd {
+            margin-top: 0.5rem 0 0.5rem 0;
+            color: white;
+            text-align: center;
+            word-wrap: nowrap;
+            background-color: #ca7658;
+          }
+        }
+      }
+      tbody {
+        .tbodyTr {
+          border-left: 1px solid #ca7658;
+          border-right: 1px solid #ca7658;
+
+          // 商品文字容器
+          .tbodyTrTdTitleBox {
+            width: 15rem;
+            padding-left: 0.5rem;
+            border-bottom: 1px solid #8f8f8f5d;
+          }
+          .tbodyTrTdFirst {
+            text-align: center;
+            width: 5rem;
+            height: 5rem;
+            padding: 0.5rem;
+            // border-left: 1px solid #ca7658;
+            border-bottom: 1px solid #8f8f8f5d;
+
+            .imgBox {
+              width: 5rem;
+              height: 5rem;
+              background-color: #000000;
+              overflow: hidden;
+              border-radius: 0.3rem;
+
+              .img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+
+          .tbodyTrTdLast {
+            text-align: center;
+            width: 5rem;
+            height: 5rem;
+            padding: 0.5rem;
+            // border-right: 1px solid #ca7658;
+            border-bottom: 1px solid #8f8f8f5d;
+          }
+
+          .modifyProductQuantityTd {
+            .increaseQuantity {
+              width: 1.5rem;
+              border-top: 1px solid black;
+              border-bottom: 1px solid black;
+              border-right: 1px solid black;
+            }
+            .quantity {
+              width: 1.5rem;
+              border-top: 1px solid black;
+              border-bottom: 1px solid black;
+            }
+            .decreaseQuantity {
+              width: 1.5rem;
+              border-top: 1px solid black;
+              border-bottom: 1px solid black;
+              border-left: 1px solid black;
+            }
+          }
+
+          .tbodyTrTd {
+            text-align: center;
+            width: 5rem;
+            height: 5rem;
+            padding: 0.5rem;
+            border-bottom: 1px solid #8f8f8f5d;
+            .p {
+              border: none;
+              background-color: #ffffff00;
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+
+    // 總額計算器父容器
+    .totalCalculatorBox {
+      background-color: #ffffff;
+      width: 100%;
+      border-left: 1px solid #ca7658;
+      border-right: 1px solid #ca7658;
+      border-bottom: 1px solid #ca7658;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      .itemBox {
+        height: 110px;
+        border-radius: 10px;
+        background-color: #eee;
+        .item {
+          height: 20px;
+        }
+      }
+    }
+  }
+}
+
+// ====================RWD 768px 以下========================
+
+// 購物車標題
+.titleBox {
+  width: 100%;
+  height: 30px;
+  background-color: #ca7658;
+
+  .productTitle {
+    color: white;
+    margin: 0;
+  }
+  .clearCart {
+    .button {
+      background-color: #ffffff00;
+      color: white;
+      margin: 0;
+      border: none;
+    }
+  }
+}
+
+// 購物車商品的父容器
+.itemBoxBelow768px {
+  padding: 0;
+
+  .cartItem {
+    height: 130px;
+    width: 95%;
+    background-color: #fff;
+    border-right: 1px solid #ca7658;
+    border-left: 1px solid #ca7658;
+    border-bottom: 1px solid #e0e0e0;
+    .imgBox {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      overflow: hidden;
+      background-color: #ca7658;
+      position: relative;
+
+      .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0; // 設置較低的 z-index
+      }
+    }
+    .price {
+      margin: 0;
+    }
+    // 數量計算器
+    .modifyProductQuantityTd {
+      margin: 0;
+      .below768PxDecreaseQuantity {
+        width: 1.5rem;
+
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-left: 1px solid black;
+      }
+
+      .below768PxQuantity {
+        width: 1.5rem;
+        border-bottom: 1px solid black;
+        border-top: 1px solid black;
+      }
+
+      .below768PxIncreaseQuantity {
+        width: 1.5rem;
+        border-top: 1px solid black;
+        border-bottom: 1px solid black;
+        border-right: 1px solid black;
+      }
+    }
+  }
+
+  // 總額計算器父容器
+  .totalCalculatorBox {
+    background-color: #ffffff;
+    width: 100%;
+    border-left: 1px solid #ca7658;
+    border-right: 1px solid #ca7658;
+    border-bottom: 1px solid #ca7658;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    .itemBox {
+      height: 110px;
+      border-radius: 10px;
+      background-color: #eee;
+      .item {
+        height: 20px;
+      }
+    }
+  }
+}

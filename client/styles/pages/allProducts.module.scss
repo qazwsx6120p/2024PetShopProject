@@ -1,0 +1,98 @@
+.cardLink {
+  text-decoration: none;
+  .card {
+    height: 100%;
+
+    .btn {
+      background-color: rgb(108, 92, 83);
+      color: white;
+    }
+    .btn:hover {
+      background-color: rgb(81, 69, 63);
+      color: white;
+    }
+  }
+}
+
+.breadcrumb {
+  .breadcrumbLink {
+    text-decoration: none;
+    color: rgb(102, 102, 102);
+  }
+}
+
+// 搜尋欄位
+.searchField {
+  .input:focus {
+    box-shadow: none !important;
+    border: 1px solid rgb(199, 199, 199) !important;
+    border-radius: 0%;
+  }
+
+  .input {
+    border-radius: 0%;
+  }
+  .btn {
+    width: 45px;
+    background-color: rgb(108, 92, 83);
+    text-align: center;
+    line-height: 35px;
+
+    .btnIcon {
+      color: white;
+    }
+  }
+  .btn:hover {
+    width: 45px;
+    background-color: rgb(81, 69, 63);
+    text-align: center;
+    line-height: 35px;
+  }
+}
+
+// 商品類別
+.categoryBox {
+  .category:active {
+    border: 0.3px solid rgb(230, 172, 75);
+  }
+  .categoryActive {
+    background-color: rgb(230, 172, 75);
+    color: white;
+  }
+}
+
+// 頁碼
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  .li {
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    .a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+    }
+    .aActive {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border: 2px solid #6c5c53;
+      border-radius: 50%;
+      text-decoration: none;
+      background-color: #6c5c53;
+      color: white;
+    }
+  }
+}

@@ -1,0 +1,86 @@
+.cardLink {
+  text-decoration: none;
+}
+.cardLink .card {
+  height: 100%;
+}
+.cardLink .card .btn {
+  background-color: rgb(108, 92, 83);
+  color: white;
+}
+.cardLink .card .btn:hover {
+  background-color: rgb(81, 69, 63);
+  color: white;
+}
+
+.breadcrumb .breadcrumbLink {
+  text-decoration: none;
+  color: rgb(102, 102, 102);
+}
+
+.searchField .input:focus {
+  box-shadow: none !important;
+  border: 1px solid rgb(199, 199, 199) !important;
+  border-radius: 0%;
+}
+.searchField .input {
+  border-radius: 0%;
+}
+.searchField .btn {
+  width: 45px;
+  background-color: rgb(108, 92, 83);
+  text-align: center;
+  line-height: 35px;
+}
+.searchField .btn .btnIcon {
+  color: white;
+}
+.searchField .btn:hover {
+  width: 45px;
+  background-color: rgb(81, 69, 63);
+  text-align: center;
+  line-height: 35px;
+}
+
+.categoryBox .category:active {
+  border: 0.3px solid rgb(230, 172, 75);
+}
+.categoryBox .categoryActive {
+  background-color: rgb(230, 172, 75);
+  color: white;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+}
+.pagination .li {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+}
+.pagination .li .a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #000;
+  border-radius: 50%;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+}
+.pagination .li .aActive {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #6c5c53;
+  border-radius: 50%;
+  text-decoration: none;
+  background-color: #6c5c53;
+  color: white;
+}/*# sourceMappingURL=allProducts.module.css.map */

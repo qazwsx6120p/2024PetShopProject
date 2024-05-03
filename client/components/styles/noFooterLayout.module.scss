@@ -1,0 +1,8 @@
+.wrapper{
+    min-height: 100%; /*外層高度100%*/
+    margin-bottom: -70vh; /*隨footer高度需做調整*/
+  }
+  .mainContent {
+    width: 100%;
+    height: 70vh; /*避免文字超出瀏覽器時，內容區塊不會和footer打架*/
+  }

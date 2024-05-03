@@ -1,0 +1,87 @@
+@charset "UTF-8";
+.cardLink:hover {
+  transform: scale(1.05); /* 放大 5% */
+}
+
+.indexContainer {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.picturesAndText {
+  width: 30vw;
+  height: auto;
+}
+
+.carImgBox {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.cardBtn {
+  background-color: rgb(84, 59, 23);
+  color: white;
+}
+
+.imgBox {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.card {
+  transition: transform 0.3s !important;
+  width: 270px;
+}
+
+.card:hover {
+  transform: translateY(-5px) !important;
+}
+
+/* RWD 桌面電腦 */
+@media screen and (min-width: 992px) {
+  .laceImg {
+    width: 50%;
+  }
+  .customCard {
+    width: 270px !important;
+  }
+  .container {
+    width: 700px !important;
+  }
+}
+/* RWD 平板電腦 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .laceImg {
+    width: 85%;
+  }
+  .picturesAndText4 {
+    width: 85%;
+  }
+  .picturesAndText5 {
+    width: 85%;
+  }
+}
+/* RWD 手機 */
+@media screen and (min-width: 0px) and (max-width: 767px) {
+  .laceImg {
+    width: 100%;
+  }
+  .picturesAndText4 {
+    display: block;
+    width: 100%;
+  }
+  .picturesAndText5 {
+    width: 100%;
+  }
+}/*# sourceMappingURL=index.module.css.map */

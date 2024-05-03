@@ -1,0 +1,97 @@
+@charset "UTF-8";
+/* components/productDetail.module.scss */
+.mainImgBox {
+  width: 100%; /* 確保元素寬度填滿父容器 */
+  padding-top: 100%; /* 設置與寬度相同的 padding-top 來維持 1:1 的寬高比 */
+  position: relative; /* 讓內部的 img 元素可以使用絕對定位 */
+  overflow: hidden;
+}
+
+.mainImg {
+  position: absolute; /* 讓圖片相對於其父元素進行定位 */
+  width: 100%; /* 圖片寬度填滿父元素 */
+  height: 100%; /* 圖片高度填滿父元素 */
+  -o-object-fit: cover;
+     object-fit: cover; /* 確保圖片完全填滿容器並保持比例 */
+  top: 0; /* 圖片定位在父元素的頂部 */
+  left: 0; /* 圖片定位在父元素的左側 */
+}
+
+.description {
+  width: 100%;
+  background-color: #fdf5e6;
+  padding: 0.5rem;
+}
+
+.precautions {
+  font-size: 12px;
+}
+
+.secondaryImgContainer {
+  margin-top: 20px;
+}
+
+.firstSecondaryImgBox {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.middleSecondaryImgBox {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.middleSecondaryImgBox {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.lastSecondaryImgBox {
+  margin-left: 5px;
+  margin-right: 0;
+}
+
+.secondaryImgBox {
+  padding-right: 5px;
+  width: 25%;
+  padding-top: 25%;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.5;
+}
+
+.secondaryImg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  top: 0;
+  left: 0;
+}
+
+.graphicsAndTextBlock .graphicsAndTextBtn {
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  border-radius: 10rem;
+}
+.graphicsAndTextBlock .graphicsAndTextBtn:active {
+  color: rgb(0, 0, 0);
+  font-size: 1rem;
+  border: none;
+  border-radius: 10rem;
+}
+
+.productDetailContainer {
+  padding-top: 20px;
+}
+.productDetailContainer .productInfoContainer {
+  padding: 20px;
+}
+.productDetailContainer .productInfoContainer hr {
+  margin: 10px 0 10px 0;
+}
+.productDetailContainer .btnColor {
+  background-color: #f86363;
+  color: #fdf5e6;
+}/*# sourceMappingURL=productDetail.module.css.map */

@@ -1,0 +1,57 @@
+.registerContainer{
+    height: 80vh;
+}
+
+.form{
+    width: 40vw;
+}
+
+.registerBtn{
+    background-color: rgb(84, 59, 23);
+    color: white;
+}
+
+.registerBtn:hover{
+    background-color: #000000;
+    color: white;
+}
+
+
+// ====================RWD========================
+
+
+/* 超大型裝置（大型桌機） */
+@media (min-width: 1200px) {
+    .form{
+        width: 40vw;
+    }
+}
+
+/* RWD 桌面電腦 */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .form{
+        width: 40vw;
+    }
+}
+
+/* RWD 平板電腦 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .form{
+        width: 50vw;
+    }
+
+    .registerContainer{
+        height: 60vh;
+    }
+}
+
+/* RWD 手機 */
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    .form{
+        width: 70vw;
+    }
+
+    .registerContainer{
+        height: 90vh;
+    }
+}

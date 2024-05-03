@@ -1,0 +1,155 @@
+@charset "UTF-8";
+.iconCartBox {
+  background-color: rgb(108, 92, 83);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 2px 0 2px;
+}
+.iconCartBox .iconCart {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.iconUserBox {
+  background-color: rgb(108, 92, 83);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 2px 0 2px;
+}
+.iconUserBox .iconUser {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+.iconLogOutBox {
+  background-color: rgb(108, 92, 83);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  margin: 0 2px 0 2px;
+}
+.iconLogOutBox .iconLogOut {
+  color: #ffffff;
+  font-size: 1.5rem;
+}
+
+.a {
+  color: #543b17 !important;
+}
+
+.icon:hover {
+  transform: scale(1.05); /* 放大 5% */
+}
+
+.iconUser:hover {
+  transform: scale(1.05); /* 放大 5% */
+}
+
+.iconLogOut:hover {
+  transform: scale(1.05); /* 放大 5% */
+}
+
+.logoA {
+  width: 15vh;
+  height: auto;
+}
+
+.logoIMG {
+  width: 100%;
+  height: auto;
+}
+
+.outerDiv {
+  border: 1px solid rgb(227, 227, 227); /* 可以调整颜色和其他边框样式 */
+  border-radius: 5px; /* 圆角大小 */
+  padding: 5px;
+}
+
+.rwdBTN {
+  border: 1px solid rgb(227, 227, 227);
+}
+
+.headerBlock {
+  width: 100%;
+  height: 8vh;
+  background-color: rgb(84, 59, 23);
+}
+
+.navbarTogglerBox {
+  background-color: rgb(108, 92, 83);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 33px;
+}
+.navbarTogglerBox .hamburger {
+  font-size: 1.5rem;
+  color: rgb(227, 227, 227);
+}
+
+/* RWD 桌面電腦 */
+@media screen and (min-width: 992px) {
+  .messageBox {
+    width: 100%;
+    height: 50px;
+    background-color: #543b17;
+  }
+  .messageBox .font {
+    color: white;
+  }
+  .messageBox .p {
+    color: white;
+    margin: 0 10px 0 0;
+    font-size: 12px;
+  }
+  .navbar {
+    height: 120px;
+  }
+}
+/* RWD 平板電腦 */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .messageBox {
+    width: 100%;
+    height: 50px;
+    background-color: #543b17;
+  }
+  .messageBox .font {
+    color: white;
+  }
+  .messageBox .p {
+    color: white;
+    margin: 0 10px 0 0;
+    font-size: 12px;
+  }
+  .navbar {
+    height: 120px;
+  }
+}
+/* RWD 手機 */
+@media screen and (min-width: 0px) and (max-width: 767px) {
+  .messageBox {
+    width: 100%;
+    height: 40px;
+    background-color: #543b17;
+  }
+  .messageBox .font {
+    color: white;
+  }
+  .messageBox .p {
+    color: white;
+    margin: 0 10px 0 0;
+    font-size: 12px;
+  }
+}/*# sourceMappingURL=header.module.css.map */

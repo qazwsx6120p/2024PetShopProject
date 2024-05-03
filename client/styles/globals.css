@@ -1,0 +1,24 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: underline;
+  color: lightblue;
+}
+
+ul {
+  list-style-type: none;
+}
+
+p {
+  margin: 0;
+}
