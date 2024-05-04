@@ -1,4 +1,11 @@
 @charset "UTF-8";
+.containerFluid {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
 .iconCartBox {
   background-color: rgb(108, 92, 83);
   border-radius: 50%;

@@ -65,6 +65,7 @@ export default function App({ Component, pageProps }) {
   return (
     <DataContext.Provider
       value={{
+        headerHeight,
         productType,
         currentProductType,
         setCurrentProductType,
