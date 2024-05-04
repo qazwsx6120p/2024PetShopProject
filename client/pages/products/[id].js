@@ -6,6 +6,7 @@ import styles from "../../styles/pages/productDetail.module.css";
 import ProductService from "../../public/services/allProducts.services.js";
 import ShoppingCartService from "../../public/services/shoppingCart.services.js";
 import { DataContext } from "../_app.js";
+import Link from "next/link";
 
 /** 依照商品數量創建 html 並生成動態路由 */
 export async function getStaticPaths() {
@@ -39,7 +40,7 @@ export default function ProductDetail({ productData }) {
   // =================================== useContext ===================================
 
   /**  @setCurrentUser 設定當前使用者函數 */
-  const { isLogin } = useContext(DataContext);
+  const { isLogin, productType, currentProductType } = useContext(DataContext);
 
   // =================================== 常數 ===================================
 
@@ -171,6 +172,71 @@ export default function ProductDetail({ productData }) {
     }
   };
 
+  /** 根據商品種類變化麵包屑文字 */
+  const handleSwitchBreadcrumbLink = () => {
+    switch (currentProductType) {
+      case productType.all:
+        return (
+          <li className="breadcrumb-item">
+            <Link
+              className={styles.breadcrumbLink}
+              href="/products/allProducts"
+            >
+              全部商品
+            </Link>
+          </li>
+        );
+
+      case productType.cat_product:
+        return (
+          <li className="breadcrumb-item">
+            <Link
+              className={`${styles.breadcrumbLink}`}
+              href="/products/allProducts"
+            >
+              貓咪商品
+            </Link>
+          </li>
+        );
+
+      case productType.dog_product:
+        return (
+          <li className="breadcrumb-item">
+            <Link
+              className={`${styles.breadcrumbLink}`}
+              href="/products/allProducts"
+            >
+              狗狗商品
+            </Link>
+          </li>
+        );
+
+      case productType.dog_food_can:
+        return (
+          <li className="breadcrumb-item">
+            <Link
+              className={`${styles.breadcrumbLink}`}
+              href="/products/allProducts"
+            >
+              狗狗鮮食罐
+            </Link>
+          </li>
+        );
+
+      case productType.cat_food_can:
+        return (
+          <li className="breadcrumb-item">
+            <Link
+              className={`${styles.breadcrumbLink}`}
+              href="/products/allProducts"
+            >
+              貓咪鮮食罐
+            </Link>
+          </li>
+        );
+    }
+  };
+
   // =================================== useEffect ===================================
 
   useEffect(() => {
@@ -182,13 +248,13 @@ export default function ProductDetail({ productData }) {
       <div className={`container ${styles.productDetailContainer}`}>
         {/* 麵包屑 */}
         <nav aria-label="breadcrumb">
-          <ol className="breadcrumb">
+          <ol className={`${styles.breadcrumb} breadcrumb`}>
             <li className="breadcrumb-item">
-              <a href="#">首頁</a>
+              <Link className={styles.breadcrumbLink} href="/">
+                首頁
+              </Link>
             </li>
-            <li className="breadcrumb-item">
-              <a href="#">商品分類</a>
-            </li>
+            {handleSwitchBreadcrumbLink()}
             <li className="breadcrumb-item active" aria-current="page">
               {productData.title}
             </li>
@@ -235,6 +301,7 @@ export default function ProductDetail({ productData }) {
               <button
                 onClick={handleProductAddToCart}
                 className={`${styles.btnColor} btn mt-4 mb-4`}
+                disabled={!isLogin()}
               >
                 加入購物車
               </button>

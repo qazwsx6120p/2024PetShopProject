@@ -7,6 +7,31 @@
 .tabContainer {
   margin-top: 10px;
 }
+.tabContainer .button {
+  border-radius: 0 !important;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.11);
+  border-right: 1px solid rgba(0, 0, 0, 0.11);
+  border-left: 1px solid rgba(0, 0, 0, 0.11);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+.tabContainer .buttonLast {
+  border-radius: 0 !important;
+  width: 100%;
+  padding-left: 1.5rem;
+  height: 40px;
+  line-height: 40px;
+  border-right: 1px solid rgba(0, 0, 0, 0.11);
+  border-left: 1px solid rgba(0, 0, 0, 0.11);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.11);
+}
+.tabContainer .active {
+  background-color: rgb(230, 172, 75);
+  color: white;
+}
 
 .orderContainer {
   margin-top: 10px;
@@ -15,6 +40,20 @@
   background-color: #ffffff !important;
   border: 1px solid #ca7658;
   border-radius: 0 !important;
+}
+.orderContainer .personalCard .cardBody {
+  padding: 0;
+}
+.orderContainer .personalCard .cardBody .titleBox {
+  padding: 10px 15px 10px 15px;
+  background-color: #ca7658;
+  color: white;
+}
+.orderContainer .personalCard .cardBody .titleBox .p {
+  margin: 0;
+}
+.orderContainer .personalCard .cardBody .dataBox {
+  padding: 5px 15px 5px 15px;
 }
 .orderContainer .personalCard .storeBtn {
   text-decoration: none;

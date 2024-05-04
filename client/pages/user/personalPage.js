@@ -54,16 +54,11 @@ export default function PersonalPage() {
   /** 商品卡片的商品資料夾 */
   const PRODUCT_IMG_URL = "/resource/product";
 
-  /** orderContainer 的 MarginTop*/
-  const orderContainerMarginTop = 10;
-
   /** 是否使用 Search 資料 */
   const isUseSearchData = searchOrderData && isSearch;
 
   /** 是否使用 Order 資料 */
   const isUseOrderData = orderData && !isSearch;
-
-  console.log(personalData);
 
   // =================================== function ===================================
 
@@ -101,48 +96,6 @@ export default function PersonalPage() {
   const getPersonalPageBgcHeight = () => {
     return window.innerHeight - headerHeight;
   };
-
-  // /** 計算訂單高度，把 main 元素撐開 */
-  // const handleOrderBgcHeight = () => {
-  //   // order.current 以初始化，並且目前在訂單種類
-  //   if (!order.current || activeTab !== "orders") {
-  //     return;
-  //   }
-
-  //   // 確保 orderData 不為 null，並且是一個有效的數組
-  //   if (!orderData || !Array.isArray(orderData)) {
-  //     return;
-  //   }
-
-  //   /**
-  //    * 計算主要內容區域的高度，
-  //    * 主要內容區域的高度為 window 高度減去 header 的高度 */
-  //   const mainContentHeightWithoutElements = window.innerHeight - headerHeight;
-
-  //   /** containerFluid padding 的高度 */
-  //   const containerFluidPadding = 70;
-
-  //   /** order 元素高度 */
-  //   const orderHeight = order.current.clientHeight;
-
-  //   /** 加總的高度 */
-  //   const totalHeight =
-  //     containerFluidPadding + orderContainerMarginTop + orderHeight;
-
-  //   // 檢查是否為搜尋狀態且搜尋結果元素高度小於主要內容區域高度，或者訂單資料為空
-  //   const shouldAdjustMainHeight =
-  //     (isSearch && totalHeight < mainHeight) || orderData.length === 0;
-
-  //   // 檢查是否為搜尋狀態且搜尋結果元素高度小於主要內容區域高度，或者訂單資料為空時，
-  //   // 就讓高度等於 mainContentHeightWithoutElements
-  //   if (shouldAdjustMainHeight) {
-  //     setMainHeight(mainContentHeightWithoutElements);
-  //     console.log(orderData);
-  //     return;
-  //   }
-  //   console.log("totalHeight", totalHeight);
-  //   setMainHeight(totalHeight);
-  // };
 
   /** 取得個人頁面資料 */
   const getPersonalData = async () => {
@@ -220,6 +173,7 @@ export default function PersonalPage() {
 
   return (
     <NoFooterLayout>
+ 
       <div
         style={
           activeTab === "orders"
@@ -230,28 +184,31 @@ export default function PersonalPage() {
       >
         <div ref={orderRow} className="row justify-content-center ">
           {/* 左側分類 */}
+
           <div className={`${styles.tabContainer} col-md-3`}>
             <div className="list-group">
               {/* 個人頭像和帳號名稱 */}
               <div className={`d-flex align-items-center mb-3`}>
                 <span>帳號名稱 : {personalData && personalData.email}</span>
               </div>
-              <button
-                className={`list-group-item list-group-item-action ${
-                  activeTab === "personal" ? "active" : ""
+              <div
+                type="button"
+                className={` ${activeTab === "personal" ? styles.active : ""} ${
+                  styles.button
                 }`}
                 onClick={() => setActiveTab("personal")}
               >
                 個人頁面
-              </button>
-              <button
-                className={`list-group-item list-group-item-action ${
-                  activeTab === "orders" ? "active" : ""
+              </div>
+              <div
+                type="button"
+                className={` ${activeTab === "orders" ? styles.active : ""} ${
+                  styles.buttonLast
                 }`}
                 onClick={() => setActiveTab("orders")}
               >
                 全部訂單
-              </button>
+              </div>
             </div>
           </div>
 
@@ -260,19 +217,18 @@ export default function PersonalPage() {
             {activeTab === "personal" && (
               <div className={`card ${styles.personalCard}`}>
                 <div className={`card-body  ${styles.cardBody}`}>
-                  <h5 className="card-title">我的檔案</h5>
-                  <p>管理你的檔案以保護你的帳戶</p>
-                  <div>
-                    <hr />
+                  <div className={`${styles.titleBox}`}>
+                    <p className={styles.p}>管理你的檔案以保護你的帳戶</p>
                   </div>
                   <div>
-                    <div className="mb-3">
+                    <div className={`${styles.dataBox} `}>
                       <label htmlFor="name" className="form-label">
-                        姓名
+                        姓名 :
                       </label>
                       <p className={`${isEditPersonalData && "d-none"} `}>
                         {personalData.username}
                       </p>
+                      <hr className={`${isEditPersonalData && "d-none"} `} />
                       <input
                         type="text"
                         className={`${
@@ -289,11 +245,12 @@ export default function PersonalPage() {
                         }}
                       />
                     </div>
-                    <div className="mb-3">
-                      <label className="form-label">性別</label>
+                    <div className={`${styles.dataBox} `}>
+                      <label className="form-label">性別 :</label>
                       <p className={`${isEditPersonalData && "d-none"} `}>
                         {personalData.gender === "male" ? "男性" : "女性"}
                       </p>
+                      <hr className={`${isEditPersonalData && "d-none"} `} />
                       <select
                         className={`${
                           !isEditPersonalData && "d-none"
@@ -310,9 +267,9 @@ export default function PersonalPage() {
                         <option value="female">女性</option>
                       </select>
                     </div>
-                    <div className="mb-3">
+                    <div className={`${styles.dataBox}`}>
                       <label htmlFor="phone" className="form-label">
-                        聯絡電話
+                        聯絡電話 :
                       </label>
                       <p className={`${isEditPersonalData && "d-none"} `}>
                         {personalData.cellPhone}
@@ -333,23 +290,27 @@ export default function PersonalPage() {
                         }}
                       />
                     </div>
-                    <div className="d-flex justify-content-around ">
-                      <a
+                    <div
+                      className={`${styles.dataBox} mb-3 d-flex justify-content-around`}
+                    >
+                      <div
+                        type="button"
                         onClick={() => setIsEditPersonalData(true)}
                         className={` ${isEditPersonalData && "d-none"} ${
                           styles.storeBtn
                         } mt-3`}
                       >
                         編輯
-                      </a>
-                      <a
+                      </div>
+                      <div
+                        type="button"
                         onClick={updatePersonalData}
                         className={` ${!isEditPersonalData && "d-none"} ${
                           styles.storeBtn
                         } mt-3`}
                       >
                         儲存
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>

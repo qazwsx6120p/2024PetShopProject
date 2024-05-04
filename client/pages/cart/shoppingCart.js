@@ -12,7 +12,6 @@ export default function ShoppingCart() {
 
   /**  @isLogin 當前是否登入函數 */
   const { headerHeight, isLogin } = useContext(DataContext);
-
   // =================================== 常數 ===================================
 
   /** 商品卡片的商品資料夾 */
@@ -319,26 +318,27 @@ export default function ShoppingCart() {
   }, [cartList]);
 
   useEffect(() => {
-    if (!cartCol.current || !checkoutBox.current) {
-      return;
-    }
-
     const updateHeights = () => {
+      // 如果 cartCol.current 或 checkoutBox.current 不存在，直接返回
+      if (!cartCol.current || !checkoutBox.current) {
+        return;
+      }
+  
       // 彈性高度 (依照喜好微調)
       let adjustableHeight = 30;
-
+  
       // 購物車元素高度
       const cartColHeight = cartCol.current.clientHeight;
-
+  
       // 結帳元素高度
       const checkoutBoxHeight = checkoutBox.current.clientHeight;
-
+  
       // window 減去 header 的高度
       const mainContentHeightWithoutElements =
         window.innerHeight - headerHeight;
-
+  
       let totalHeight;
-
+  
       // 如果主要內容高度大於購物車元素高度，就使用主要內容高度
       if (
         mainContentHeightWithoutElements >
@@ -347,26 +347,31 @@ export default function ShoppingCart() {
         totalHeight = mainContentHeightWithoutElements;
         return;
       }
-
+  
       // 否則，使用購物車元素高度和結帳元素高度的總和
       totalHeight = cartColHeight + checkoutBoxHeight + adjustableHeight;
-
+  
       setMainHeight(totalHeight);
     };
-
+  
     // 監聽元素尺寸變化時重新計算高度
     const resizeObserver = new ResizeObserver(() => {
       updateHeights();
     });
-
-    resizeObserver.observe(cartCol.current);
-    resizeObserver.observe(checkoutBox.current);
-
+  
+    if (cartCol.current) {
+      resizeObserver.observe(cartCol.current);
+    }
+    if (checkoutBox.current) {
+      resizeObserver.observe(checkoutBox.current);
+    }
+  
     // 清除 ResizeObserver
     return () => {
       resizeObserver.disconnect();
     };
   }, [cartCol.current, checkoutBox.current, headerHeight]); // 確保在 cartList 改變時更新高度
+  
 
   return (
     <NoFooterLayout>

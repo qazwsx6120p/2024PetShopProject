@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
 
   // 確認信箱是否被註冊過
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send("此信箱已經被註冊過...");
+  if (emailExist) return res.status(400).send("此信箱已經被註冊過");
 
   // 註冊新用戶
   let { username, email, password, cellPhone, gender, birthDate } = req.body;
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
   let { error } = loginValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  // 確認信箱是否被註冊過
+  // 確認信箱是否存在
   const foundUser = await User.findOne({ email: req.body.email });
   if (!foundUser) {
     return res.status(401).send("無法找到使用者，請確認信箱是否正確");

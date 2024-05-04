@@ -27,6 +27,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+/** 獲取銷量最高的商品 */
+router.get("/", async (req, res) => {
+  try {
+    /** 獲取全部商品的 Promise 物件 */
+    const foundAllProduct = await Product.find({}).exec();
+    return res.send(foundAllProduct);
+  } catch (error) {
+    return res.status(500).send(error);
+  }
+});
+
+
 /** 使用商品 id 獲取該商品
  *  @_id mongoose 裡面存的 id 是 @_id 的形式，故此 route 要使用 @_id */
 router.get("/:_id", async (req, res) => {

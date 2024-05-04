@@ -264,8 +264,10 @@ export default function Home() {
         </div>
       </div>
 
+   
+
       {/* 熱門商品 */}
-      <div className="container">
+      {/* <div className="container mt-5">
         <div className="row  row-cols-2 row-cols-md-2 row-cols-lg-4 g-xl-2">
           <div className="col my-2 d-flex justify-content-center">
             <div
@@ -352,7 +354,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </Layout>
   );
 }

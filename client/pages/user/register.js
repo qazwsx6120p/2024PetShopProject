@@ -22,7 +22,7 @@ export default function Register() {
     cellPhone: "",
   });
 
-   /** joi 錯誤訊息 */
+  /** joi 錯誤訊息 */
   const [errors, setErrors] = useState({});
 
   // =================================== 函數 ===================================
@@ -81,6 +81,8 @@ export default function Register() {
   /** 送出資料 */
   const handleSubmit = async (event) => {
     event.preventDefault(); // 阻止表單的默認提交行為
+
+    // 前端驗證阻擋
     const { error } = validateForm(formData);
     if (error) {
       const errors = {};
@@ -95,7 +97,7 @@ export default function Register() {
       alert("註冊成功，您現在將被導向登入頁面");
       router.push("/user/login"); // 導向登入頁
     } catch (error) {
-      console.log(error);
+      alert(error.response.data);
     }
   };
   return (
@@ -195,13 +197,13 @@ export default function Register() {
                   type="date"
                   className="form-control"
                   id="dob"
-                  name="birthDate" 
+                  name="birthDate"
                   required
                   onChange={handleChange}
                 />
                 {/* 顯示錯誤訊息 */}
                 {errors && errors.birthDate && (
-                  <p className="text-danger">{errors.birthDate}</p> 
+                  <p className="text-danger">{errors.birthDate}</p>
                 )}
               </div>
               {/* 聯絡電話 */}

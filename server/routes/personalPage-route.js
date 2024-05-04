@@ -49,7 +49,6 @@ router.get("/personalPage", authenticateUser, async (req, res) => {
       cellPhone: foundUser.cellPhone,
       gender: foundUser.gender,
     };
-    console.log("/personalPage", userData);
     if (!foundUser) return res.status(400).send("使用者資訊錯誤");
     return res.status(200).send({
       message: `成功取得使用者:${foundUser.username}。的全部訂單資料`,
@@ -78,7 +77,6 @@ router.patch("/updatePersonalData", authenticateUser, async (req, res) => {
     if (!updatedUser) {
       return res.status(400).send("使用者資訊錯誤");
     }
-    console.log("更新使用者資料", updatedUser);
 
     // 回覆成功的訊息和更新後的使用者資料
     res.send({

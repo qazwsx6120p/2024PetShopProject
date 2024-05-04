@@ -4,6 +4,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { DataContext } from "../_app.js";
+import Joi from "joi";
 import authService from "../../public/services/auth.services.js";
 
 export default function Login() {
@@ -20,10 +21,33 @@ export default function Login() {
   /** 使用者密碼狀態 */
   const [password, setPassword] = useState("");
 
-  /** 後端的註冊錯誤訊息狀態 */
-  const [errorMessage, setErrorMessage] = useState("");
+  /** joi 錯誤訊息 */
+  const [errors, setErrors] = useState({});
 
   // =================================== function ===================================
+
+  /** 使用 joi 驗證表單 */
+  const validateForm = (data) => {
+    const schema = Joi.object({
+      email: Joi.string()
+        .min(6)
+        .max(50)
+        .email({ tlds: { allow: false } })
+        .required()
+        .messages({
+          "any.required": "郵件不能為空",
+          "string.email": "請輸入有效的郵件地址",
+          "string.min": "郵件至少包含 6 個字元",
+          "string.max": "郵件最多包含 50 個字元",
+        }),
+      password: Joi.string().min(6).max(255).required().messages({
+        "string.empty": "密碼不能為空",
+        "string.min": "密碼至少包含 6 個字元",
+        "string.max": "密碼最多包含 255 個字元",
+      }),
+    });
+    return schema.validate(data, { abortEarly: false });
+  };
 
   /** 處理使用者郵件 @event input 事件 */
   const handleChangeEmail = (event) => {
@@ -38,14 +62,24 @@ export default function Login() {
   /** 處理使用者登入，會將使用者資訊存在 @setCurrentUser 狀態 ，
    *  並一併存在 localStorage ( 為了使用 JWT)，然後重新導向至個人頁面 */
   const handleLogin = async () => {
+    // 前端驗證阻擋
+    const { error } = validateForm({ email, password });
+    if (error) {
+      const errors = {};
+      error.details.forEach((item) => {
+        errors[item.path[0]] = item.message;
+      });
+      setErrors(errors);
+      return;
+    }
+
     try {
       const response = await authService.login(email, password);
       localStorage.setItem("user", JSON.stringify(response.data));
       alert("登入成功，您現在將被導向首頁");
       router.push("/"); // 將路由導向個人頁面
     } catch (error) {
-      console.error("Login error:", error);
-      setErrorMessage("登入失敗，請檢查您的郵件和密碼並重試。");
+      alert(error.response.data);
     }
   };
 
@@ -87,6 +121,10 @@ export default function Login() {
                       placeholder="請輸入郵件"
                       required
                     />
+                    {/* 顯示錯誤訊息 */}
+                    {errors && errors.email && (
+                      <p className="text-danger">{errors.email}</p>
+                    )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">
@@ -103,6 +141,10 @@ export default function Login() {
                       placeholder="請輸入密碼"
                       required
                     />
+                    {/* 顯示錯誤訊息 */}
+                    {errors && errors.password && (
+                      <p className="text-danger">{errors.password}</p>
+                    )}
                   </div>
                   <div className="text-center">
                     <button

@@ -46,16 +46,38 @@ router.post("/checkout", authenticateUser, async (req, res) => {
     const foundUser = await User.findOne({ email: req.user.email });
     if (!foundUser) return res.status(400).send("使用者資訊錯誤");
 
-    /** 把 _id 屬性刪掉，無用的 id ，只需要 productId
-     * {
-     *    "productId": "661e20954ef9899dabf44287",
-     *    "title": "鮮肉罐｜貓咪98%無膠鮮肉主食罐",
-     *    "price": 90,
-     *    "folderName": "貓咪無膠鮮肉主食罐",
-     *    "checked": 0,
-     *    "productNumber": 4,
-     *    "_id": 4,
-     *  }  */
+    // 處理商品的銷售量
+    for (const product of cartList) {
+      try {
+        /** 每個結帳的商品 */
+        const foundProduct = await Product.findOne({ _id: product.productId });
+
+        if (!foundProduct) {
+          // 如果找不到對應的產品，則跳過該商品的更新
+          console.log(`找不到產品，productId：${product.productId}`);
+          continue;
+        }
+        // 重新賦值
+        foundProduct.sales = foundProduct.sales + product.productNumber;
+        await foundProduct.save();
+
+        console.log(`已更新產品銷售量 : ${foundProduct}`);
+
+      } catch (error) {
+        console.error(
+          `更新銷售量時發生錯誤，productId：${product.productId}，錯誤信息：${error.message}`
+        );
+      }
+    }
+
+    /** 把 _id 屬性刪掉，mongoDB 自產的無用的 id ，只需要 productId
+     *  "productId": "661e20954ef9899dabf44287",
+     *  "title": "鮮肉罐｜貓咪98%無膠鮮肉主食罐",
+     *  "price": 90,
+     *  "folderName": "貓咪無膠鮮肉主食罐",
+     *  "checked": 0,
+     *  "productNumber": 4,
+     *  "_id": 4, */
     const updatedProducts = cartList.map((product) => {
       const { _id, ...productWithoutId } = product;
       return productWithoutId;
