@@ -6,16 +6,37 @@ import styles from "./styles/layout.module.css";
 import { DataContext } from "../pages/_app.js";
 
 export default function Layout({ children }) {
-  // ========= useContext =========
+  // =================================== useContext ===================================
   const {
     productType,
     currentProductType,
     setCurrentProductType,
     headerHeight,
-  } = useContext(DataContext); // 使用 useContext 来訪問上下文
+    footerHeight,
+    ssrCompleted,
+  } = useContext(DataContext);
+
+  // =================================== 函數 ===================================
+
+  /**
+   *  @minHeight 設定 Main 的最小高度
+   *  @marginTop 因為使用 fixed 將 header 貼至頂部，故 Main 要使用 marginTop 退下去，
+   *  才不會與 header 重疊 */
+  const getMainStyle = () => {
+    if (!ssrCompleted) {
+      return;
+    }
+    const __nextHeight = 24;
+    const mainHeight = headerHeight + footerHeight + __nextHeight;
+
+    return {
+      marginTop: headerHeight,
+      minHeight: `calc(100% - ${mainHeight}px)`,
+    };
+  };
 
   return (
-    <div className={`${styles.wrapper}`}>
+    <div style={{ height: "100%" }}>
       {/* head 資訊，bootstrap5 CDN 連結 / bootstrap5 script */}
       <Head>
         <title>寵物網站</title>
@@ -31,7 +52,7 @@ export default function Layout({ children }) {
         setCurrentProductType={setCurrentProductType}
       ></Header>
       {/* 為主要組件的內容，用 marginTop 將內容往下推 header 的高度 */}
-      <main style={{ marginTop: headerHeight }}>{children}</main>
+      <main style={getMainStyle()}>{children}</main>
       <Footer></Footer>
     </div>
   );

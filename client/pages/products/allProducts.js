@@ -253,235 +253,221 @@ export default function AllProducts({ productData }) {
 
   return (
     <Layout>
-      <div
-        style={{ paddingLeft: "0", paddingRight: "0" }}
-        className="container-fluid"
-      >
-        <div className="banner row ">
-          <img src="/resource/allProducts/banner.png" alt="" />
+    {/* Banner */}
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col">
+          <img src="/resource/allProducts/banner.png" alt="" className="img-fluid" />
         </div>
       </div>
-      <div className="container mt-3">
-        {/* 麵包屑和搜尋欄位 */}
-        <div className="row justify-content-between align-items-center mb-4">
-          <div className="col-lg-3">
-            {/* 麵包屑 */}
-            <nav aria-label="breadcrumb" className={`${styles.breadcrumb}`}>
-              <ol className="breadcrumb">
-                <li className="breadcrumb-item">
-                  <Link className={`${styles.breadcrumbLink}`} href="/">
-                    首頁
-                  </Link>
-                </li>
-                <li className="breadcrumb-item">
-                  <Link className={`${styles.breadcrumbLink}`} href="">
-                    全部商品
-                  </Link>
-                </li>
-                {switchBreadcrumbTypeToShow()}
-              </ol>
-            </nav>
-          </div>
+    </div>
 
-          {/* 搜尋欄位和排序 */}
-          <div className="col-lg-9 d-flex justify-content-lg-end justify-content-between">
-            {/* 搜尋欄位 */}
-            <div className={`${styles.searchField} d-flex me-5`}>
-              <input
-                onChange={(event) => getProductSearchString(event)}
-                type="text"
-                className={`${styles.input} form-control`}
-                placeholder="幫毛寶貝搜尋產品"
-              />
-              <div
-                style={NO_ROUNDED}
-                onClick={handleSearchProductData}
-                type="button"
-                className={`${styles.btn}`}
-              >
-                <SlMagnifier className={`${styles.btnIcon}`} />
-              </div>
-            </div>
-
-            {/* 排序下拉選單 */}
-            <DropdownMenu
-              SORT_PRICE_LOW_TO_HIGH={SORT_PRICE_LOW_TO_HIGH}
-              SORT_PRICE_HIGH_TO_LOW={SORT_PRICE_HIGH_TO_LOW}
-              setSortType={setSortType}
-              handleSort={handleSort}
-            ></DropdownMenu>
-          </div>
+    <div className="container mt-3">
+      {/* 麵包屑和搜尋欄位 */}
+      <div className="row justify-content-between align-items-center mb-4">
+        <div className="col-lg-3">
+          {/* 麵包屑 */}
+          <nav aria-label="breadcrumb" className={`${styles.breadcrumb}`}>
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link className={`${styles.breadcrumbLink}`} href="/">
+                  首頁
+                </Link>
+              </li>
+              <li className="breadcrumb-item">
+                <Link className={`${styles.breadcrumbLink}`} href="">
+                  全部商品
+                </Link>
+              </li>
+              {switchBreadcrumbTypeToShow()}
+            </ol>
+          </nav>
         </div>
 
-        {/* 商品分類和商品卡片 */}
-        <div className="row">
-          <div className="col-lg-3 mb-4">
-            {/* 商品分類 */}
-            <ul className={`${styles.categoryBox} list-group d-flex`}>
-              <li
-                style={NO_ROUNDED}
-                onClick={() => {
-                  setCurrentProductType(productType.all);
-                }}
-                className={` ${styles.category} ${
-                  currentProductType === productType.all &&
-                  styles.categoryActive
-                } list-group-item btn text-start`}
-              >
-                全部商品
-              </li>
-              <li
-                style={NO_ROUNDED}
-                onClick={() => {
-                  setCurrentProductType(productType.cat_product);
-                }}
-                className={`${styles.category} ${
-                  currentProductType === productType.cat_product &&
-                  styles.categoryActive
-                } list-group-item btn text-start`}
-              >
-                貓咪商品
-              </li>
-              <li
-                style={NO_ROUNDED}
-                onClick={() => {
-                  setCurrentProductType(productType.dog_product);
-                }}
-                className={`${styles.category} ${
-                  currentProductType === productType.dog_product &&
-                  styles.categoryActive
-                } list-group-item btn text-start`}
-              >
-                狗狗商品
-              </li>
-              <li
-                style={NO_ROUNDED}
-                onClick={() => {
-                  setCurrentProductType(productType.cat_food_can);
-                }}
-                className={`${styles.category} ${
-                  currentProductType === productType.cat_food_can &&
-                  styles.categoryActive
-                } list-group-item btn text-start`}
-              >
-                貓咪鮮食罐
-              </li>
-              <li
-                style={NO_ROUNDED}
-                onClick={() => {
-                  setCurrentProductType(productType.dog_food_can);
-                }}
-                className={`${styles.category} ${
-                  currentProductType === productType.dog_food_can &&
-                  styles.categoryActive
-                } list-group-item btn text-start`}
-              >
-                狗狗鮮食罐
-              </li>
-            </ul>
+        {/* 搜尋欄位和排序 */}
+        <div className="col-lg-9 d-flex justify-content-lg-end justify-content-between">
+          {/* 搜尋欄位 */}
+          <div className={`${styles.searchField} d-flex me-5`}>
+            <input
+              onChange={(event) => getProductSearchString(event)}
+              type="text"
+              className={`${styles.input} form-control`}
+              placeholder="幫毛寶貝搜尋產品"
+            />
+            <div
+              style={NO_ROUNDED}
+              onClick={handleSearchProductData}
+              type="button"
+              className={`${styles.btn}`}
+            >
+              <SlMagnifier className={`${styles.btnIcon}`} />
+            </div>
           </div>
 
-          {/* 商品卡片 */}
-          <div className="col-lg-9">
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-              {/* 根據種類顯示商品，_id mongoose 裡面存的 id 是 _id 的形式，故要使用 _id  */}
-              {selectedProductData &&
-                !isSearch &&
-                getProductsPerPage().map((product) => (
-                  <Link
-                    className={`${styles.cardLink}`}
-                    key={product._id}
-                    href={`/products/${product._id}`}
-                  >
-                    <div className="col h-100">
-                      <div className={`${styles.card} card`}>
-                        <img
-                          src={`${PRODUCT_CARD_IMG_URL}/${product.folderName}/1.webp`}
-                          className="card-img-top"
-                          alt={product.title}
-                        />
-                        <div className="card-body d-flex flex-column">
-                          {/* 使用 flex-column 将按钮容器设置为纵向排列 */}
-                          <div className="cardTitleBox">
-                            <h5 className="card-title">{product.title}</h5>
-                          </div>
-                          <p className="card-text">NT${product.price}</p>
-                          <div className="mt-auto">
-                            {/* 使用 mt-auto 将按钮容器推至卡片底部 */}
-                            <button href="#" className={`${styles.btn} btn`}>
-                              立即購買
-                            </button>
-                          </div>
+          {/* 排序下拉選單 */}
+          <DropdownMenu
+            SORT_PRICE_LOW_TO_HIGH={SORT_PRICE_LOW_TO_HIGH}
+            SORT_PRICE_HIGH_TO_LOW={SORT_PRICE_HIGH_TO_LOW}
+            setSortType={setSortType}
+            handleSort={handleSort}
+          ></DropdownMenu>
+        </div>
+      </div>
+
+      {/* 商品分類和商品卡片 */}
+      <div className="row">
+        <div className="col-lg-3 mb-4">
+          {/* 商品分類 */}
+          <ul className={`${styles.categoryBox} list-group d-flex`}>
+            <li
+              style={NO_ROUNDED}
+              onClick={() => {
+                setCurrentProductType(productType.all);
+              }}
+              className={` ${styles.category} ${
+                currentProductType === productType.all &&
+                styles.categoryActive
+              } list-group-item btn text-start`}
+            >
+              全部商品
+            </li>
+            <li
+              style={NO_ROUNDED}
+              onClick={() => {
+                setCurrentProductType(productType.cat_product);
+              }}
+              className={`${styles.category} ${
+                currentProductType === productType.cat_product &&
+                styles.categoryActive
+              } list-group-item btn text-start`}
+            >
+              貓咪商品
+            </li>
+            <li
+              style={NO_ROUNDED}
+              onClick={() => {
+                setCurrentProductType(productType.dog_product);
+              }}
+              className={`${styles.category} ${
+                currentProductType === productType.dog_product &&
+                styles.categoryActive
+              } list-group-item btn text-start`}
+            >
+              狗狗商品
+            </li>
+            <li
+              style={NO_ROUNDED}
+              onClick={() => {
+                setCurrentProductType(productType.cat_food_can);
+              }}
+              className={`${styles.category} ${
+                currentProductType === productType.cat_food_can &&
+                styles.categoryActive
+              } list-group-item btn text-start`}
+            >
+              貓咪鮮食罐
+            </li>
+            <li
+              style={NO_ROUNDED}
+              onClick={() => {
+                setCurrentProductType(productType.dog_food_can);
+              }}
+              className={`${styles.category} ${
+                currentProductType === productType.dog_food_can &&
+                styles.categoryActive
+              } list-group-item btn text-start`}
+            >
+              狗狗鮮食罐
+            </li>
+          </ul>
+        </div>
+
+        {/* 商品卡片 */}
+        <div className="col-lg-9">
+          <div className={`row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4`}>
+            {/* 根據種類顯示商品，_id mongoose 裡面存的 id 是 _id 的形式，故要使用 _id  */}
+            {selectedProductData &&
+              !isSearch &&
+              getProductsPerPage().map((product) => (
+                <Link
+                  className={`${styles.cardLink}`}
+                  key={product._id}
+                  href={`/products/${product._id}`}
+                >
+                  <div className="col h-100">
+                    <div className={`${styles.card} card`}>
+                      <img
+                        src={`${PRODUCT_CARD_IMG_URL}/${product.folderName}/1.webp`}
+                        className="card-img-top"
+                        alt={product.title}
+                      />
+                      <div className="card-body d-flex flex-column">
+                        {/* 使用 flex-column 将按钮容器设置为纵向排列 */}
+                        <div className="cardTitleBox">
+                          <h5 className="card-title">{product.title}</h5>
+                        </div>
+                        <p className="card-text">NT${product.price}</p>
+                        <div className="mt-auto">
+                          {/* 使用 mt-auto 将按钮容器推至卡片底部 */}
+                          <button href="#" className={`${styles.btn} btn`}>
+                            立即購買
+                          </button>
                         </div>
                       </div>
                     </div>
-                  </Link>
-                ))}
-
-              {/* 根據搜索欄位顯示商品，_id mongoose 裡面存的 id 是 _id 的形式，故要使用 _id */}
-              {searchProductData &&
-                isSearch &&
-                searchProductData.map((product) => (
-                  <Link
-                    className={`${styles.cardLink}`}
-                    key={product._id}
-                    href={`/products/${product._id}`}
-                  >
-                    <div className="col h-100">
-                      <div className={`${styles.card} card`}>
-                        <img
-                          src={`${PRODUCT_CARD_IMG_URL}/${product.folderName}/1.webp`}
-                          className="card-img-top"
-                          alt={product.title}
-                        />
-                        <div className="card-body d-flex flex-column">
-                          {/* 使用 flex-column 将按钮容器设置为纵向排列 */}
-                          <div className="cardTitleBox">
-                            <h5 className="card-title">{product.title}</h5>
-                          </div>
-                          <p className="card-text">NT${product.price}</p>
-                          <div className="mt-auto">
-                            {/* 使用 mt-auto 将按钮容器推至卡片底部 */}
-                            <button href="#" className={`${styles.btn} btn`}>
-                              立即購買
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-
-              {/* 找不到商品時顯示 */}
-              {searchProductData &&
-                searchProductData.length === 0 &&
-                isSearch && (
-                  <div className="col  mx-auto my-auto">
-                    <h5>沒有符合的商品</h5>
                   </div>
-                )}
-            </div>
+                </Link>
+              ))}
+
+            {/* 根據搜索欄位顯示商品，_id mongoose 裡面存的 id 是 _id 的形式，故要使用 _id */}
+            {searchProductData &&
+              isSearch &&
+              searchProductData.map((product) => (
+                <Link
+                  className={`${styles.cardLink}`}
+                  key={product._id}
+                  href={`/products/${product._id}`}
+                >
+                  <div className="col h-100">
+                    <div className={`${styles.card} card`}>
+                      <img
+                        src={`${PRODUCT_CARD_IMG_URL}/${product.folderName}/1.webp`}
+                        className="card-img-top"
+                        alt={product.title}
+                      />
+                      <div className="card-body d-flex flex-column">
+                        {/* 使用 flex-column 将按钮容器设置为纵向排列 */}
+                        <div className="cardTitleBox">
+                          <h5 className="card-title">{product.title}</h5>
+                        </div>
+                        <p className="card-text">NT${product.price}</p>
+                        <div className="mt-auto">
+                          {/* 使用 mt-auto 将按钮容器推至卡片底部 */}
+                          <button href="#" className={`${styles.btn} btn`}>
+                            立即購買
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+
+            {/* 找不到商品時顯示 */}
+            {searchProductData &&
+              searchProductData.length === 0 &&
+              isSearch && (
+                <div className="col  mx-auto my-auto">
+                  <h5>沒有符合的商品</h5>
+                </div>
+              )}
           </div>
         </div>
+      </div>
 
         {/* 商品頁碼 */}
         <div className="row mt-5">
           <div className="col">
-            {/* <nav className={`${styles.pageBox}`} aria-label="Page navigation example">
-              <ul className="pagination justify-content-center">
-                <li className={`${styles.pageItem} page-item`} onClick={goToPreviousPage} >
-                  <a className="page-link" href="#" aria-label="Previous">
-                    <span className={`${styles.span}`} aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                {selectedProductData && preparePerPageDataToShow()}
-                <li className={`${styles.pageItem} page-item`} onClick={goToNextPage} >
-                  <a className="page-link" href="#" aria-label="Next">
-                    <span className={`${styles.span}`} aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav> */}
             <ul className={`${styles.pagination}`}>
               <li onClick={goToPreviousPage} className={`${styles.li}`}>
                 <a className={`${styles.a}`} href="#">

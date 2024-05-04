@@ -5,9 +5,34 @@ import styles from "./styles/noFooterLayout.module.css";
 import { DataContext } from "../pages/_app.js"; // 导入 _app.js 中的 DataContext
 
 export default function NoFooterLayout({ children }) {
-  // ========= useContext =========
-  const { productType, currentProductType, setCurrentProductType,headerHeight } =
-    useContext(DataContext); // 使用 useContext 来訪問上下文
+  // =================================== useContext ===================================
+  const {
+    productType,
+    currentProductType,
+    setCurrentProductType,
+    headerHeight,
+    footerHeight,
+    ssrCompleted,
+  } = useContext(DataContext);
+
+  // =================================== 函數 ===================================
+
+  /**
+   *  @minHeight 設定 Main 的最小高度
+   *  @marginTop 因為使用 fixed 將 header 貼至頂部，故 Main 要使用 marginTop 退下去，
+   *  才不會與 header 重疊 */
+  const getMainStyle = () => {
+    if (!ssrCompleted) {
+      return;
+    }
+    const __nextHeight = 24;
+    const mainHeight = headerHeight + footerHeight + __nextHeight;
+
+    return {
+      marginTop: headerHeight,
+      minHeight: `calc(100% - ${mainHeight}px)`,
+    };
+  };
 
   return (
     <div className={`${styles.layoutContainer}`}>
@@ -26,7 +51,9 @@ export default function NoFooterLayout({ children }) {
         setCurrentProductType={setCurrentProductType}
       ></Header>
       {/* 為主要組件的內容，用 marginTop 將內容往下推 header 的高度 */}
-      <main style={{marginTop:headerHeight}} className={`${styles.mainContent}`}>{children}</main>
+      <main style={getMainStyle()} className={`${styles.mainContent}`}>
+        {children}
+      </main>
     </div>
   );
 }

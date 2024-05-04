@@ -43,6 +43,9 @@ export default function App({ Component, pageProps }) {
   /** header 高度 */
   const [headerHeight, setHeaderHeight] = useState(0);
 
+  /** footer 高度 */
+  const [footerHeight, setFooterHeight] = useState(0);
+
   /** 商品種類狀態 */
   const [ssrCompleted, setSsrCompleted] = useState(false);
 
@@ -57,6 +60,7 @@ export default function App({ Component, pageProps }) {
     return false;
   };
 
+
   // =================================== useEffect ===================================
 
   /** 確認目前 SSR 是否已經的結束 */
@@ -65,13 +69,15 @@ export default function App({ Component, pageProps }) {
   return (
     <DataContext.Provider
       value={{
+        ssrCompleted,
         headerHeight,
+        setHeaderHeight,
+        footerHeight,
+        setFooterHeight,
         productType,
         currentProductType,
         setCurrentProductType,
         isLogin,
-        headerHeight,
-        setHeaderHeight,
       }}
     >
       <Component {...pageProps} />;
