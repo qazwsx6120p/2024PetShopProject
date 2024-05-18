@@ -43,8 +43,6 @@ export default function ShoppingCart() {
   const [curEditQuantityProductId, setCurEditQuantityProductId] =
     useState(null);
 
-  console.log("cartList",cartList);
-
   // =================================== useRouter ===================================
 
   const router = useRouter();
@@ -68,7 +66,12 @@ export default function ShoppingCart() {
     try {
       const response = await ShoppingCartServices.get();
       setCartList(response.data.shoppingCartList);
+      console.warn("取得使用者購物車資料", response);
     } catch (error) {
+      if (!isLogin()) {
+        console.log("使用者尚未登入");
+        return;
+      }
       console.log(error);
     }
   };
@@ -78,6 +81,7 @@ export default function ShoppingCart() {
     try {
       const response = await ShoppingCartServices.clearCart();
       setCartList(response.data.shoppingCartList);
+      console.warn("清除所有購物車", response);
     } catch (error) {
       console.log(error);
     }
@@ -88,7 +92,12 @@ export default function ShoppingCart() {
     try {
       const response = await ShoppingCartServices.removeProductFromCartById(id);
       setCartList(response.data.shoppingCartList);
+      console.warn("將特定商品從購物車刪除", response);
     } catch (error) {
+      if (!isLogin()) {
+        console.log("使用者尚未登入");
+        return;
+      }
       console.log(error);
     }
   };
@@ -101,31 +110,42 @@ export default function ShoppingCart() {
         newQuantity
       );
       setCartList(response.data.shoppingCartList);
+      console.warn("修改特定商品數量", response);
     } catch (error) {
+      if (!isLogin()) {
+        console.log("使用者尚未登入");
+        return;
+      }
       console.log(error);
     }
   };
 
   /** 點擊增加按鈕時只更改相應商品的數量，而不是直接增加一個固定的數量 */
   const handleIncreaseQuantityButton = (id) => {
-    setCartList((prevCartList) =>
-      prevCartList.map((item) =>
-        item.productId === id
-          ? { ...item, productNumber: item.productNumber + 1 }
-          : item
-      )
+    const updatedCartList = cartList.map((item) =>
+      item.productId === id
+        ? { ...item, productNumber: item.productNumber + 1 }
+        : item
     );
+    setCartList(updatedCartList);
+    const productNumber = updatedCartList.find(
+      (item) => item.productId === id
+    ).productNumber;
+    handleEditProductQuantityById(id, productNumber);
   };
 
   /** 點擊減少按鈕時只更改相應商品的數量，而不是直接減少一個固定的數量 */
   const handleDecreaseQuantityButton = (id) => {
-    setCartList((prevCartList) =>
-      prevCartList.map((item) =>
-        item.productId === id && item.productNumber > 1
-          ? { ...item, productNumber: item.productNumber - 1 }
-          : item
-      )
+    const updatedCartList = cartList.map((item) =>
+      item.productId === id && item.productNumber > 1
+        ? { ...item, productNumber: item.productNumber - 1 }
+        : item
     );
+    setCartList(updatedCartList);
+    const productNumber = updatedCartList.find(
+      (item) => item.productId === id
+    ).productNumber;
+    handleEditProductQuantityById(id, productNumber);
   };
 
   /** 處理單項商品的總計金額 */
@@ -306,10 +326,6 @@ export default function ShoppingCart() {
   // =================================== useEffect ===================================
 
   useEffect(() => {
-    handleEditProductQuantityById(curEditQuantityProductId, quantity);
-  }, [quantity]);
-
-  useEffect(() => {
     getCartList();
   }, []);
 
@@ -323,22 +339,22 @@ export default function ShoppingCart() {
       if (!cartCol.current || !checkoutBox.current) {
         return;
       }
-  
+
       // 彈性高度 (依照喜好微調)
       let adjustableHeight = 30;
-  
+
       // 購物車元素高度
       const cartColHeight = cartCol.current.clientHeight;
-  
+
       // 結帳元素高度
       const checkoutBoxHeight = checkoutBox.current.clientHeight;
-  
+
       // window 減去 header 的高度
       const mainContentHeightWithoutElements =
         window.innerHeight - headerHeight;
-  
+
       let totalHeight;
-  
+
       // 如果主要內容高度大於購物車元素高度，就使用主要內容高度
       if (
         mainContentHeightWithoutElements >
@@ -347,31 +363,30 @@ export default function ShoppingCart() {
         totalHeight = mainContentHeightWithoutElements;
         return;
       }
-  
+
       // 否則，使用購物車元素高度和結帳元素高度的總和
       totalHeight = cartColHeight + checkoutBoxHeight + adjustableHeight;
-  
+
       setMainHeight(totalHeight);
     };
-  
+
     // 監聽元素尺寸變化時重新計算高度
     const resizeObserver = new ResizeObserver(() => {
       updateHeights();
     });
-  
+
     if (cartCol.current) {
       resizeObserver.observe(cartCol.current);
     }
     if (checkoutBox.current) {
       resizeObserver.observe(checkoutBox.current);
     }
-  
+
     // 清除 ResizeObserver
     return () => {
       resizeObserver.disconnect();
     };
   }, [cartCol.current, checkoutBox.current, headerHeight]); // 確保在 cartList 改變時更新高度
-  
 
   return (
     <NoFooterLayout>

@@ -76,6 +76,7 @@ export default function Login() {
     try {
       const response = await authService.login(email, password);
       localStorage.setItem("user", JSON.stringify(response.data));
+      console.log("使用者資料", JSON.stringify(response.data));
       alert("登入成功，您現在將被導向首頁");
       router.push("/"); // 將路由導向個人頁面
     } catch (error) {

@@ -1,8 +1,14 @@
 import Layout from "../components/layout";
 import Link from "next/link";
 import styles from "../styles/pages/index.module.css";
+import React, { useContext, useEffect, useRef } from "react";
+import { DataContext } from "../pages/_app.js";
 
 export default function Home() {
+  // =================================== useContext ===================================
+
+  /**  @setCurrentUser 設定當前使用者函數 */
+  const { productType, setCurrentProductType } = useContext(DataContext);
   return (
     <Layout>
       {/* 輪播 banner */}
@@ -136,6 +142,9 @@ export default function Home() {
         <div className="row  justify-content-center">
           <div className={`${styles.cardLink} col-12 col-md-3`}>
             <Link
+              onClick={() => {
+                setCurrentProductType(productType.all);
+              }}
               style={{ textDecoration: "none" }}
               href="/products/allProducts"
             >
@@ -153,6 +162,9 @@ export default function Home() {
           </div>
           <div className={`${styles.cardLink} col-12 col-md-3`}>
             <Link
+              onClick={() => {
+                setCurrentProductType(productType.cat_product);
+              }}
               style={{ textDecoration: "none" }}
               href="/products/allProducts"
             >
@@ -170,6 +182,9 @@ export default function Home() {
           </div>
           <div className={`${styles.cardLink} col-12 col-md-3`}>
             <Link
+              onClick={() => {
+                setCurrentProductType(productType.dog_product);
+              }}
               style={{ textDecoration: "none" }}
               href="/products/allProducts"
             >
@@ -263,8 +278,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-   
 
       {/* 熱門商品 */}
       {/* <div className="container mt-5">

@@ -53,8 +53,6 @@ export default function ProductDetail({ productData }) {
     border: "1px solid rgba(0, 0, 0, 0.277)",
   };
 
-  const NO_OUTLINE = { outline: "none" };
-
   /** 商品詳細區的按鈕選取樣式 */
   const BTN_ACTIVE = {
     color: "white",
@@ -109,8 +107,10 @@ export default function ProductDetail({ productData }) {
 
   /** 渲染注意事項 */
   const handlePrecautionsStyleAndRender = () => {
-    return precautions.map((precaution) => (
-      <p className={`${styles.precautions} mt-1 mb-1`}>{precaution}</p>
+    return precautions.map((precaution, i) => (
+      <p key={i} className={`${styles.precautions} mt-1 mb-1`}>
+        {precaution}
+      </p>
     ));
   };
 
@@ -163,7 +163,6 @@ export default function ProductDetail({ productData }) {
       router.push("/user/login");
     }
     try {
-      console.log(productData);
       await ShoppingCartService.addToCart(productData._id);
       alert(`已成功將 ${productData.title} 加入購物車`);
       router.push("/cart/shoppingCart"); // 重定向至首页
@@ -240,6 +239,7 @@ export default function ProductDetail({ productData }) {
   // =================================== useEffect ===================================
 
   useEffect(() => {
+    console.log("向後端取得當前商品資料:", productData);
     handleImagesUrl();
   }, []);
 
@@ -343,17 +343,17 @@ export default function ProductDetail({ productData }) {
                 if (i >= 4) {
                   return (
                     btnState === BTN.DESCRIBE && (
-                      <img className="w-100" src={url} alt="" />
+                      <img key={i} className="w-100" src={url} alt="" />
                     )
                   );
                 }
               })}
             {btnState === BTN.QA && (
-              <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingOne">
+              <div className="accordion" id="accordionExample">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingOne">
                     <button
-                      class="accordion-button"
+                      className="accordion-button"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseOne"
@@ -365,11 +365,11 @@ export default function ProductDetail({ productData }) {
                   </h2>
                   <div
                     id="collapseOne"
-                    class="accordion-collapse collapse show"
+                    className="accordion-collapse collapse show"
                     aria-labelledby="headingOne"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       <p>
                         無法合併配送，需麻煩分開下單喔！ <br />
                         因為配合物流調整運送規範，2019 年 5
@@ -378,10 +378,10 @@ export default function ProductDetail({ productData }) {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingTwo">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingTwo">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseTwo"
@@ -393,11 +393,11 @@ export default function ProductDetail({ productData }) {
                   </h2>
                   <div
                     id="collapseTwo"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     aria-labelledby="headingTwo"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       <p>
                         【 信用卡 】 <br />
                         汪喵採用的信用卡付款系統有兩個：Epay、Tpay，如遇到信用卡因為單一系統無法刷過，可換另一個系統刷刷看，並且聯繫客服確認是否有刷卡成功，如未確認又遇上刷卡失敗，該訂單會自動轉成取消。
@@ -456,10 +456,10 @@ export default function ProductDetail({ productData }) {
                     </div>
                   </div>
                 </div>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="headingThree">
+                <div className="accordion-item">
+                  <h2 className="accordion-header" id="headingThree">
                     <button
-                      class="accordion-button collapsed"
+                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#collapseThree"
@@ -471,11 +471,11 @@ export default function ProductDetail({ productData }) {
                   </h2>
                   <div
                     id="collapseThree"
-                    class="accordion-collapse collapse"
+                    className="accordion-collapse collapse"
                     aria-labelledby="headingThree"
                     data-bs-parent="#accordionExample"
                   >
-                    <div class="accordion-body">
+                    <div className="accordion-body">
                       <p>
                         關於發票，汪喵提供五種方式 …<br />
                         <br />

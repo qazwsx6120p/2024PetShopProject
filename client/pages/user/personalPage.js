@@ -109,6 +109,8 @@ export default function PersonalPage() {
 
       setOrderData(response.data.order);
       setPersonalData(response.data.userData);
+      console.warn("取得使用者資料", response);
+      console.warn("取得使用者訂單資料", response);
     } catch (error) {
       console.log(error);
     }
@@ -131,7 +133,7 @@ export default function PersonalPage() {
   const handleChange = (event) => {
     setPersonalData({
       ...personalData,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value.trim(),
     });
   };
 
@@ -139,7 +141,10 @@ export default function PersonalPage() {
   const updatePersonalData = async () => {
     setIsEditPersonalData(false);
     try {
-      await personalServices.updatePersonalData(personalData);
+      const updatedUser = await personalServices.updatePersonalData(
+        personalData
+      );
+      console.warn("更新完的使用者資料", updatedUser);
     } catch (error) {
       console.log(error);
     }
@@ -151,29 +156,8 @@ export default function PersonalPage() {
   useEffect(() => {
     getPersonalData();
   }, []);
-
-  // 監聽並計算 OrderBg 高度
-  // useEffect(() => {
-  //   // 初始化時計算一次高度
-  //   handleOrderBgcHeight();
-
-  //   // 監聽元素尺寸變化時重新計算高度
-  //   const resizeObserver = new ResizeObserver(() => {
-  //     handleOrderBgcHeight();
-  //   });
-
-  //   // 監聽order.current的變化
-  //   if (order.current) resizeObserver.observe(order.current);
-
-  //   // 清除ResizeObserver
-  //   return () => {
-  //     resizeObserver.disconnect();
-  //   };
-  // }, [order.current, searchOrderData, headerHeight]);
-
   return (
     <NoFooterLayout>
- 
       <div
         style={
           activeTab === "orders"
@@ -237,7 +221,6 @@ export default function PersonalPage() {
                         id="name"
                         name="username"
                         placeholder="請輸入姓名"
-                        defaultValue={personalData.username}
                         value={personalData.username}
                         required
                         onChange={(event) => {
@@ -282,7 +265,6 @@ export default function PersonalPage() {
                         id="phone"
                         name="cellPhone"
                         placeholder="請輸入聯絡電話"
-                        defaultValue={personalData.cellPhone}
                         value={personalData.cellPhone}
                         required
                         onChange={(event) => {
@@ -351,10 +333,10 @@ export default function PersonalPage() {
                           </p>
                         </div>
 
-                        {order.products.map((product) => (
+                        {order.products.map((product, i) => (
                           <div
                             className={`${styles.orderItem}  mt-1`}
-                            key={product.productId}
+                            key={i}
                           >
                             <div style={{ padding: "10px" }} className="d-flex">
                               {/* 圖片 */}
@@ -409,10 +391,10 @@ export default function PersonalPage() {
                           </p>
                         </div>
 
-                        {order.products.map((product) => (
+                        {order.products.map((product,i) => (
                           <div
                             className={`${styles.orderItem}  mt-1`}
-                            key={product.productId}
+                            key={i}
                           >
                             <div style={{ padding: "10px" }} className="d-flex">
                               {/* 圖片 */}

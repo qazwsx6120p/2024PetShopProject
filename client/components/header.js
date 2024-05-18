@@ -26,8 +26,6 @@ export default function Header({ productType, setCurrentProductType }) {
   /** navBar 的背景色 */
   const NAV_BAR_BACKGROUND_COLOR = "rgb(255, 255, 255)";
 
-  const texts = ["你好你好你好你好", "我好我好我好我好", "他好他好他好他好"];
-
   // =================================== useContext ===================================
 
   /**  @setCurrentUser 設定當前使用者函數 */
@@ -36,7 +34,6 @@ export default function Header({ productType, setCurrentProductType }) {
   // =================================== useRouter ===================================
 
   const router = useRouter();
-  // =================================== useState ===================================
 
   // =================================== function ===================================
 
@@ -47,7 +44,12 @@ export default function Header({ productType, setCurrentProductType }) {
 
   /** 處理登出 */
   const handelLogOut = () => {
+    if (!isLogin()) {
+      alert("您還尚未登入");
+      return;
+    }
     authServices.logout();
+
     alert("您已經成功登出，將您導向首頁");
     // 重新導向首頁
     if (router) router.push("/");
@@ -83,8 +85,9 @@ export default function Header({ productType, setCurrentProductType }) {
           </font>
           <div className=" d-none d-md-block">
             <div className="d-flex ">
-              <p className={`${styles.p}`}>常見問題</p>
-              <Link className={`${styles.p}` } href="/feedingComputer">餵食小工具</Link>
+              <Link className={`${styles.p}`} href="/feedingComputer">
+                餵食小工具
+              </Link>
             </div>
           </div>
         </div>
@@ -176,22 +179,23 @@ export default function Header({ productType, setCurrentProductType }) {
                 <Link
                   className={`${styles.navBarLink} nav-link`}
                   style={{ color: A_TAG_COLOR }}
-                  href={true ? "/user/personalPage" : "/user/login"}
+                  href={"/user/login"}
                 >
-                  登入
+                  {isLogin() ? "個人頁面" : "登入"}
                 </Link>
               </li>
               <li className="nav-item d-md-none d-block">
                 <Link
                   className={`${styles.navBarLink} nav-link`}
                   style={{ color: A_TAG_COLOR }}
-                  href="/user/login"
+                  href="/cart/shoppingCart"
                 >
-                  個人頁面
+                  購物車
                 </Link>
               </li>
               <li className="nav-item d-md-none d-block">
                 <Link
+                  onClick={handelLogOut}
                   className={`${styles.navBarLink} nav-link`}
                   style={{ color: A_TAG_COLOR }}
                   href="/"

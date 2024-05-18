@@ -1,0 +1,10 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.form .btn {
+  text-align: center;
+  background-color: rgb(230, 172, 75);
+  color: white;
+  padding: 5px 0 5px 0;
+}/*# sourceMappingURL=feedingComputer.module.css.map */

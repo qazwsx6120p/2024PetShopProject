@@ -6,9 +6,10 @@ body {
 }
 
 #__next {
-  height: 100%;
+  height: 0%;
   display: flex;
   flex-direction: column;
+  /* pointer-events: none; */
 }
 
 * {
